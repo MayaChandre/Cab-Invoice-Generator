@@ -7,8 +7,6 @@ package com.bridgelabz;
 
 	public class InvoiceServiceTest {
 	    InvoiceGenerator invoiceGenerator = null;
-
-	      // To create object before any test case is called.
    
 	    @Before
 	    public void setUp() {
@@ -29,5 +27,15 @@ package com.bridgelabz;
 	        int time = 1;
 	        double fare = invoiceGenerator.calculateFare(distance,time);
 	        Assert.assertEquals(5, fare, 0.0);
+	    }
+	   
+	    //return the aggregate total for all the rides
+	     
+	    @Test
+	    public void givenMultipleRides_ShouldReturnTotalFare() {
+	        Ride[] rides = { new Ride(2.0, 5),
+	                new Ride(0.1, 1) };
+	        double fare = invoiceGenerator.calculateTotalFare(rides);
+	        Assert.assertEquals(30, fare, 0.0);
 	    }
 	}
