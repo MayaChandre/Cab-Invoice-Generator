@@ -1,9 +1,9 @@
 package com.bridgelabz;
 
-
-	import org.junit.Assert;
-	import org.junit.Before;
-	import org.junit.Test;
+  import java.util.Hashtable;
+  import org.junit.Assert;
+  import org.junit.Before;
+  import org.junit.Test;
 
 	public class InvoiceServiceTest {
 	    InvoiceGenerator invoiceGenerator = null;
@@ -49,5 +49,30 @@ package com.bridgelabz;
 	        InvoiceSummary expectdInvoiceSummary = new InvoiceSummary(2, 30);
 	        Assert.assertEquals(expectdInvoiceSummary, summary);
 	    }
-	}
 	    
+	    // return the final invoice for particular userID
+	    
+	    @Test
+	    public void givenUserID_ShouldReturnInvoiceSummary() {
+	        Hashtable<Integer, Ride[]> htable = new Hashtable<>();
+
+	        int userID1 = 1;
+	        Ride[] ride1 = { new Ride(2.0, 5),
+	                new Ride(0.1, 1) };
+	        htable.put(userID1, ride1);
+
+	        int userID2 = 2;
+	        Ride[] ride2 = { new Ride(4.0, 10),
+	                new Ride(1, 1) };
+	        htable.put(userID2, ride2);
+
+	        int userID = 2;
+
+	        if(htable.containsKey(userID)) {
+	            InvoiceSummary summary = invoiceGenerator.calculateFareSummary(htable.get(userID));
+	            InvoiceSummary expectdInvoiceSummary = new InvoiceSummary(2, 61);
+	            Assert.assertEquals(expectdInvoiceSummary, summary);
+	        }
+	    }
+	}
+
